@@ -1,0 +1,12 @@
+com\alumninetwork\dto\RegisterRequest.class
+com\alumninetwork\entity\User.class
+com\alumninetwork\service\AuthService.class
+com\alumninetwork\BackendApplication.class
+com\alumninetwork\dto\AuthResponse.class
+com\alumninetwork\repository\UserRepository.class
+com\alumninetwork\ApiController.class
+com\alumninetwork\dto\LoginRequest.class
+com\alumninetwork\security\JwtUtil.class
+com\alumninetwork\controller\AuthController.class
+com\alumninetwork\entity\UserRole.class
+com\alumninetwork\config\SecurityConfig.class
