@@ -3,6 +3,7 @@ import { Card, Button, Container, Row, Col, Alert, Nav } from 'react-bootstrap';
 import Profile from './Profile';
 import Events from './Events';
 import Jobs from './Jobs';
+import NewsFeed from './NewsFeed';
 
 interface User {
   email: string;
@@ -27,6 +28,8 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
         return <Events user={user} onLogout={onLogout} />;
       case 'jobs':
         return <Jobs />;
+      case 'news':
+        return <NewsFeed />;
       case 'dashboard':
       default:
         return (
@@ -135,6 +138,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                     onClick={() => setActiveTab('jobs')}
                   >
                     Job Board
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link 
+                    active={activeTab === 'news'} 
+                    onClick={() => setActiveTab('news')}
+                  >
+                    News Feed
                   </Nav.Link>
                 </Nav.Item>
               </Nav>

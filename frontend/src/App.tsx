@@ -3,6 +3,9 @@ import { Container, Card, Spinner, Button } from 'react-bootstrap';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NewsFeed from './components/NewsFeed';
+import ExternalNews from './components/ExternalNews';
 
 interface User {
   email: string;
@@ -61,17 +64,17 @@ function App() {
     );
   }
 
-  // If authenticated, show dashboard
-  if (isAuthenticated && user) {
-    return <Dashboard user={user} onLogout={handleLogout} />;
-  }
-
-  // Show authentication forms
-  if (showRegister) {
-    return <Register onRegister={handleRegister} onSwitchToLogin={() => setShowRegister(false)} />;
-  }
-
-  return <Login onLogin={handleLogin} onSwitchToRegister={() => setShowRegister(true)} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/news" element={<NewsFeed />} />
+        <Route path="/news/external" element={<ExternalNews />} />
+        <Route path="/*" element={isAuthenticated && user ? <Dashboard user={user} onLogout={handleLogout} /> : (
+          showRegister ? <Register onRegister={handleRegister} onSwitchToLogin={() => setShowRegister(false)} /> : <Login onLogin={handleLogin} onSwitchToRegister={() => setShowRegister(true)} />
+        )} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
