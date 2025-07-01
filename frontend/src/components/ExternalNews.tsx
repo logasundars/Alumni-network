@@ -12,7 +12,7 @@ interface Article {
   source: { name: string };
 }
 
-const API_KEY = 'YOUR_NEWSAPI_KEY'; // Replace with your NewsAPI.org key
+const API_KEY = 'YOUR_NEWSAPI_KEY';
 const NEWS_URL = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
 
 const ExternalNews: React.FC = () => {
@@ -27,8 +27,9 @@ const ExternalNews: React.FC = () => {
   const fetchExternalNews = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(NEWS_URL);
-      setArticles(res.data.articles);
+      const res = await axios.get('/api/external-news');
+      const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+      setArticles(data.articles || []);
     } catch (err) {
       setError('Failed to fetch external news.');
     }

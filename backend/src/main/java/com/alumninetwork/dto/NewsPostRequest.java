@@ -1,13 +1,11 @@
 package com.alumninetwork.dto;
 
-import com.alumninetwork.entity.NewsCategory;
-
 public class NewsPostRequest {
     private String title;
     private String content;
     private String summary;
     private String imageUrl;
-    private NewsCategory category;
+    private String category;
 
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
@@ -17,6 +15,6 @@ public class NewsPostRequest {
     public void setSummary(String summary) { this.summary = summary; }
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-    public NewsCategory getCategory() { return category; }
-    public void setCategory(NewsCategory category) { this.category = category; }
+    public String getCategory() { return category; }
+    public void setCategory(String category) { this.category = category; }
 } 

@@ -18,12 +18,26 @@ interface NewsPost {
   comments: any[];
 }
 
+const NEWS_CATEGORIES = [
+  "CAREER_DEVELOPMENT",
+  "INDUSTRY_NEWS",
+  "ALUMNI_SUCCESS",
+  "UNIVERSITY_UPDATES",
+  "TECHNOLOGY",
+  "BUSINESS",
+  "EDUCATION",
+  "NETWORKING",
+  "MENTORSHIP",
+  "EVENTS",
+  "GENERAL"
+];
+
 const NewsFeed: React.FC = () => {
   const [posts, setPosts] = useState<NewsPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [newPost, setNewPost] = useState({ title: '', content: '' });
+  const [newPost, setNewPost] = useState({ title: '', content: '', category: 'GENERAL' });
   const [posting, setPosting] = useState(false);
 
   useEffect(() => {
@@ -46,7 +60,7 @@ const NewsFeed: React.FC = () => {
     setPosting(true);
     try {
       await axios.post('/api/news', newPost, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
-      setNewPost({ title: '', content: '' });
+      setNewPost({ title: '', content: '', category: 'GENERAL' });
       setOpenSnackbar(true);
       fetchPosts();
     } catch (err) {
@@ -84,6 +98,20 @@ const NewsFeed: React.FC = () => {
                 required
                 sx={{ mb: 2 }}
               />
+              <TextField
+                select
+                label="Category"
+                value={newPost.category}
+                onChange={e => setNewPost({ ...newPost, category: e.target.value })}
+                SelectProps={{ native: true }}
+                fullWidth
+                required
+                sx={{ mb: 2 }}
+              >
+                {NEWS_CATEGORIES.map(cat => (
+                  <option key={cat} value={cat}>{cat.replace(/_/g, ' ')}</option>
+                ))}
+              </TextField>
               <Button type="submit" variant="contained" disabled={posting}>
                 {posting ? <CircularProgress size={24} /> : 'Post'}
               </Button>

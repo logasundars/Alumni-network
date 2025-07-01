@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, Spinner, Button } from 'react-bootstrap';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NewsFeed from './components/NewsFeed';
 import ExternalNews from './components/ExternalNews';
+import LoadingScreen from './components/LoadingScreen';
 
 interface User {
   email: string;
@@ -19,17 +19,43 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [showRegister, setShowRegister] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Check if user is already logged in
+    const token = localStorage.getItem('token');
+    const userEmail = localStorage.getItem('userEmail');
+    
+    if (token && userEmail) {
+      // You could validate the token here if needed
+      setUser({
+        email: userEmail,
+        firstName: localStorage.getItem('userFirstName') || '',
+        lastName: localStorage.getItem('userLastName') || '',
+        role: localStorage.getItem('userRole') || 'USER'
+      });
+      setIsAuthenticated(true);
+    }
+
+    // Check backend connection
     fetch('/api')
       .then(res => res.ok ? res.text() : Promise.reject('API not reachable'))
-      .then(text => setApiMessage(text))
-      .catch(() => setApiMessage('Could not connect to backend.'));
+      .then(text => {
+        setApiMessage(text);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setApiMessage('Could not connect to backend.');
+        setIsLoading(false);
+      });
   }, []);
 
   const handleLogin = (token: string, userData: User) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userEmail', userData.email);
+    localStorage.setItem('userFirstName', userData.firstName);
+    localStorage.setItem('userLastName', userData.lastName);
+    localStorage.setItem('userRole', userData.role);
     setUser(userData);
     setIsAuthenticated(true);
   };
@@ -37,30 +63,37 @@ function App() {
   const handleRegister = (token: string, userData: User) => {
     localStorage.setItem('token', token);
     localStorage.setItem('userEmail', userData.email);
+    localStorage.setItem('userFirstName', userData.firstName);
+    localStorage.setItem('userLastName', userData.lastName);
+    localStorage.setItem('userRole', userData.role);
     setUser(userData);
     setIsAuthenticated(true);
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userFirstName');
+    localStorage.removeItem('userLastName');
+    localStorage.removeItem('userRole');
     setUser(null);
     setIsAuthenticated(false);
   };
 
-  // If backend is not connected, show the original status card
+  // Determine loading screen status
+  const getLoadingStatus = () => {
+    if (isLoading) return 'loading';
+    if (apiMessage === 'Hello from backend!') return 'connected';
+    return 'error';
+  };
+
+  // If backend is not connected, show the loading screen
   if (apiMessage !== 'Hello from backend!') {
     return (
-      <Container className="d-flex vh-100 align-items-center justify-content-center">
-        <Card style={{ minWidth: 400 }} className="shadow">
-          <Card.Body>
-            <Card.Title className="mb-4 text-primary text-center" as="h1">Alumni Network Platform</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted text-center">Backend status:</Card.Subtitle>
-            <div className="text-center">
-              {apiMessage === 'Loading...' ? <Spinner animation="border" /> : <span>{apiMessage}</span>}
-            </div>
-          </Card.Body>
-        </Card>
-      </Container>
+      <LoadingScreen
+        status={getLoadingStatus()}
+        message={apiMessage}
+      />
     );
   }
 
@@ -69,9 +102,17 @@ function App() {
       <Routes>
         <Route path="/news" element={<NewsFeed />} />
         <Route path="/news/external" element={<ExternalNews />} />
-        <Route path="/*" element={isAuthenticated && user ? <Dashboard user={user} onLogout={handleLogout} /> : (
-          showRegister ? <Register onRegister={handleRegister} onSwitchToLogin={() => setShowRegister(false)} /> : <Login onLogin={handleLogin} onSwitchToRegister={() => setShowRegister(true)} />
-        )} />
+        <Route path="/*" element={
+          isAuthenticated && user ? (
+            <Dashboard user={user} onLogout={handleLogout} />
+          ) : (
+            showRegister ? (
+              <Register onRegister={handleRegister} onSwitchToLogin={() => setShowRegister(false)} />
+            ) : (
+              <Login onLogin={handleLogin} onSwitchToRegister={() => setShowRegister(true)} />
+            )
+          )
+        } />
       </Routes>
     </Router>
   );

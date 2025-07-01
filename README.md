@@ -71,6 +71,3 @@ alumni-network/
    mysql -u root -p
    source database/schema.sql;
    ```
-
-3. **Backend Setup**
-   ```

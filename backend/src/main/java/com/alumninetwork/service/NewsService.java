@@ -26,14 +26,13 @@ public class NewsService {
                 .stream().map(this::toResponse).collect(Collectors.toList());
     }
 
-    public NewsPostResponse createNewsPost(NewsPostRequest request, String userEmail) {
-        User author = userRepository.findByEmail(userEmail).orElseThrow();
+    public NewsPostResponse createNewsPost(NewsPostRequest request, User author) {
         NewsPost post = new NewsPost();
         post.setTitle(request.getTitle());
         post.setContent(request.getContent());
         post.setSummary(request.getSummary());
         post.setImageUrl(request.getImageUrl());
-        post.setCategory(request.getCategory());
+        post.setCategory(NewsCategory.valueOf(request.getCategory()));
         post.setAuthor(author);
         newsPostRepository.save(post);
         return toResponse(post);

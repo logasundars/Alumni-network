@@ -47,4 +47,3 @@ com\alumninetwork\controller\NewsController.class
 com\alumninetwork\dto\LoginRequest.class
 com\alumninetwork\repository\EventRepository.class
 com\alumninetwork\service\EventService.class
-com\alumninetwork\config\SecurityConfig.class
