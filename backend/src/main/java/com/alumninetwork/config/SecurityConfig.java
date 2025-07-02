@@ -10,10 +10,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.alumninetwork.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
     
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -30,6 +32,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/test").permitAll()
                 .requestMatchers("/api").permitAll()
                 .requestMatchers("/api/profile/**").permitAll()
+                .requestMatchers("/uploads/**").permitAll()
                 .requestMatchers("/api/events/**").permitAll()
                 .requestMatchers("/api/jobs/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/news/**").permitAll()
@@ -40,5 +43,11 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions().sameOrigin());
         
         return http.build();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/uploads/**")
+                .addResourceLocations("file:uploads/");
     }
 } 

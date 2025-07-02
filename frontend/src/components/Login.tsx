@@ -117,7 +117,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
 
           {/* Form */}
           <Card.Body style={{ padding: 'var(--spacing-2xl)' }}>
-            <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -160,12 +160,12 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                       fontSize: '1.25rem',
                       zIndex: 1
                     }} />
-                    <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      required
+                    required
                       style={{
                         paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                         borderRadius: 'var(--radius-lg)',
@@ -211,12 +211,12 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                       fontSize: '1.25rem',
                       zIndex: 1
                     }} />
-                    <Form.Control
+                  <Form.Control
                       type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
-                      required
+                    required
                       style={{
                         paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                         paddingRight: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
@@ -329,8 +329,8 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                 }}>
                   Don't have an account?{' '}
                   <button
-                    type="button"
-                    onClick={onSwitchToRegister}
+                  type="button"
+                  onClick={onSwitchToRegister}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -345,9 +345,9 @@ const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => {
                   </button>
                 </p>
               </motion.div>
-            </Form>
-          </Card.Body>
-        </Card>
+              </Form>
+            </Card.Body>
+          </Card>
       </motion.div>
     </div>
   );

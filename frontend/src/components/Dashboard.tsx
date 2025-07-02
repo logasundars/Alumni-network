@@ -28,8 +28,9 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
+const Dashboard: React.FC<DashboardProps> = ({ user: initialUser, onLogout }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [user, setUser] = useState(initialUser);
 
   const stats = [
     { label: 'Total Alumni', value: '2,847', icon: PeopleIcon, color: '#2563eb', change: '+12%' },
@@ -64,7 +65,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             variants={contentVariants}
             transition={{ duration: 0.3 }}
           >
-            <Profile user={user} onLogout={onLogout} />
+            <Profile user={user} onLogout={onLogout} onProfileUpdate={setUser} />
           </motion.div>
         );
       case 'events':
@@ -225,7 +226,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 );
               })}
             </Row>
-
+            
             {/* Features Grid */}
             <Row>
               <Col lg={8} className="mb-4">

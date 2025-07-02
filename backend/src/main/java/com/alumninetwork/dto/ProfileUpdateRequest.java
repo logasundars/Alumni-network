@@ -11,6 +11,7 @@ public class ProfileUpdateRequest {
     private String linkedinUrl;
     private String githubUrl;
     private String portfolioUrl;
+    private String profilePicture;
     
     // Constructors
     public ProfileUpdateRequest() {}
@@ -94,5 +95,13 @@ public class ProfileUpdateRequest {
     
     public void setPortfolioUrl(String portfolioUrl) {
         this.portfolioUrl = portfolioUrl;
+    }
+    
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+    
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 } 

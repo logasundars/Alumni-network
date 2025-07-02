@@ -20,8 +20,18 @@ interface SidebarProps {
     lastName: string;
     email: string;
     role: string;
+    profilePicture?: string;
   };
 }
+
+// Helper to get the correct profile image URL
+const getProfileImageUrl = (url?: string) => {
+  if (!url) return undefined;
+  if (url.startsWith('/uploads/')) {
+    return `http://localhost:8080${url}`;
+  }
+  return url;
+};
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, user }) => {
   const navItems = [
@@ -91,20 +101,20 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, use
           background: 'rgba(255, 255, 255, 0.05)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-md)' }}>
-            <div style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, var(--primary-color), var(--primary-light))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontWeight: 600,
-              fontSize: '1.125rem'
-            }}>
-              {user.firstName.charAt(0)}{user.lastName.charAt(0)}
-            </div>
+            {user.profilePicture && (
+              <img
+                src={getProfileImageUrl(user.profilePicture)}
+                alt="Profile"
+                style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '2px solid var(--primary-color)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+                }}
+              />
+            )}
             <div>
               <p style={{ 
                 color: 'white', 

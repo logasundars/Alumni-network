@@ -54,8 +54,8 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
 
     try {
       const response = await axios.post('/api/auth/register', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
         email: formData.email,
         password: formData.password
       });
@@ -143,7 +143,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
 
           {/* Form */}
           <Card.Body style={{ padding: 'var(--spacing-2xl)' }}>
-            <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
               {error && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
@@ -189,13 +189,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                         fontSize: '1.25rem',
                         zIndex: 1
                       }} />
-                      <Form.Control
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
+                  <Form.Control
+                    type="text"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                         placeholder="First name"
-                        required
+                    required
                         style={{
                           paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                           borderRadius: 'var(--radius-lg)',
@@ -214,7 +214,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                         }}
                       />
                     </div>
-                  </Form.Group>
+                </Form.Group>
                 </motion.div>
 
                 <motion.div
@@ -242,13 +242,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                         fontSize: '1.25rem',
                         zIndex: 1
                       }} />
-                      <Form.Control
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
+                  <Form.Control
+                    type="text"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                         placeholder="Last name"
-                        required
+                    required
                         style={{
                           paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                           borderRadius: 'var(--radius-lg)',
@@ -267,7 +267,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                         }}
                       />
                     </div>
-                  </Form.Group>
+                </Form.Group>
                 </motion.div>
               </div>
 
@@ -296,13 +296,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                       fontSize: '1.25rem',
                       zIndex: 1
                     }} />
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                       placeholder="Enter your email"
-                      required
+                    required
                       style={{
                         paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                         borderRadius: 'var(--radius-lg)',
@@ -349,13 +349,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                       fontSize: '1.25rem',
                       zIndex: 1
                     }} />
-                    <Form.Control
+                  <Form.Control
                       type={showPassword ? 'text' : 'password'}
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
                       placeholder="Create a password"
-                      required
+                    required
                       style={{
                         paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                         paddingRight: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
@@ -430,13 +430,13 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                       fontSize: '1.25rem',
                       zIndex: 1
                     }} />
-                    <Form.Control
+                  <Form.Control
                       type={showConfirmPassword ? 'text' : 'password'}
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                       placeholder="Confirm your password"
-                      required
+                    required
                       style={{
                         paddingLeft: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
                         paddingRight: 'calc(var(--spacing-md) + 1.25rem + var(--spacing-sm))',
@@ -549,8 +549,8 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                 }}>
                   Already have an account?{' '}
                   <button
-                    type="button"
-                    onClick={onSwitchToLogin}
+                  type="button"
+                  onClick={onSwitchToLogin}
                     style={{
                       background: 'none',
                       border: 'none',
@@ -565,9 +565,9 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                   </button>
                 </p>
               </motion.div>
-            </Form>
-          </Card.Body>
-        </Card>
+              </Form>
+            </Card.Body>
+          </Card>
       </motion.div>
     </div>
   );

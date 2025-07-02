@@ -60,6 +60,9 @@ public class ProfileService {
             if (request.getPortfolioUrl() != null) {
                 user.setPortfolioUrl(request.getPortfolioUrl());
             }
+            if (request.getProfilePicture() != null) {
+                user.setProfilePicture(request.getProfilePicture());
+            }
             
             User savedUser = userRepository.save(user);
             return convertToProfileResponse(savedUser);

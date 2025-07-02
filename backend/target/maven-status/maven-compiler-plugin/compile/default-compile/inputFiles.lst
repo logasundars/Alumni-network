@@ -38,6 +38,7 @@ E:\Alumini- network\backend\src\main\java\com\alumninetwork\service\NewsService.
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\entity\EventStatus.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\repository\CommentRepository.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\entity\UserRole.java
+E:\Alumini- network\backend\src\main\java\com\alumninetwork\config\CorsConfig.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\BackendApplication.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\controller\NewsController.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\dto\NewsPostRequest.java
