@@ -14,6 +14,7 @@ import {
   Dropdown,
   DropdownButton
 } from 'react-bootstrap';
+import './Jobs.css';
 
 interface User {
   email: string;
@@ -321,7 +322,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
                 <Row>
                   {filteredEvents.map(event => (
                     <Col md={6} lg={4} key={event.id} className="mb-3">
-                      <Card>
+                      <Card className="event-card mb-4 shadow-sm border-0">
                         {event.imageUrl && (
                           <Card.Img 
                             variant="top" 
@@ -329,7 +330,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
                             style={{ height: '200px', objectFit: 'cover' }}
                           />
                         )}
-                        <Card.Body>
+                        <Card.Body className="event-card-body">
                           <Card.Title>{event.title}</Card.Title>
                           <Card.Text>
                             {event.description.length > 100 
@@ -338,10 +339,10 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
                           </Card.Text>
                           
                           <div className="mb-2">
-                            <Badge bg={getEventTypeBadgeVariant(event.eventType)} className="me-1">
+                            <Badge className="event-type-badge me-1" bg={getEventTypeBadgeVariant(event.eventType)}>
                               {event.eventType}
                             </Badge>
-                            <Badge bg={getStatusBadgeVariant(event.status)}>
+                            <Badge className="event-status-badge" bg={getStatusBadgeVariant(event.status)}>
                               {event.status}
                             </Badge>
                           </div>
@@ -358,6 +359,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
                             <Button 
                               variant="outline-primary" 
                               size="sm"
+                              className="event-action-btn"
                               onClick={() => handleEdit(event)}
                             >
                               Edit
@@ -366,6 +368,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
                               <Button 
                                 variant="outline-danger" 
                                 size="sm"
+                                className="event-action-btn"
                                 onClick={() => handleDelete(event.id)}
                               >
                                 Delete
@@ -384,7 +387,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
       </Row>
 
       {/* Create Event Modal */}
-      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)} size="lg">
+      <Modal show={showCreateModal} onHide={() => setShowCreateModal(false)} size="lg" className="event-modal">
         <Modal.Header closeButton>
           <Modal.Title>Create New Event</Modal.Title>
         </Modal.Header>
@@ -550,7 +553,7 @@ const Events: React.FC<EventsProps> = ({ user, onLogout }) => {
       </Modal>
 
       {/* Edit Event Modal */}
-      <Modal show={showEditModal} onHide={() => setShowEditModal(false)} size="lg">
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)} size="lg" className="event-modal">
         <Modal.Header closeButton>
           <Modal.Title>Edit Event</Modal.Title>
         </Modal.Header>

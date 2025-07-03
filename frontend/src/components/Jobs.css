@@ -86,17 +86,19 @@
 }
 
 .job-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(37,99,235,0.16), 0 1.5px 6px rgba(6,182,212,0.10);
+  padding: 1.3rem 1.2rem 1.1rem 1.2rem;
+  margin-bottom: 1.5rem;
+  border: 1.5px solid #e0e7ef;
+  transition: box-shadow 0.18s, transform 0.18s, border 0.16s;
 }
 
 .job-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 36px rgba(37,99,235,0.22), 0 3px 12px rgba(6,182,212,0.16);
+  transform: translateY(-4px) scale(1.015);
+  border: 1.5px solid #06b6d4;
 }
 
 .job-header {
@@ -108,28 +110,31 @@
 
 .job-header h3 {
   margin: 0;
-  color: #333;
-  font-size: 18px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #232946;
 }
 
 .status-badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-  background: #e9ecef;
-  color: #495057;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #232946;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.95em;
+  margin-left: 0.5rem;
 }
 
 .job-company {
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 5px;
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
 }
 
 .job-location {
-  color: #666;
-  margin-bottom: 10px;
+  color: #06b6d4;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
 }
 
 .job-details {
@@ -140,32 +145,34 @@
 }
 
 .job-details span {
-  padding: 4px 8px;
-  background: #f8f9fa;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #666;
+  background: #f3f4f6;
+  color: #232946;
+  border-radius: 6px;
+  padding: 0.18rem 0.7rem;
+  margin-right: 0.5rem;
+  font-size: 0.97em;
+  font-weight: 500;
 }
 
 .job-description {
-  color: #555;
-  line-height: 1.5;
-  margin-bottom: 15px;
+  color: #232946;
+  margin: 0.7rem 0 0.5rem 0;
+  font-size: 1.01em;
 }
 
 .job-footer {
+  border-top: 1px solid #e0e7ef;
+  margin-top: 0.7rem;
+  padding-top: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
+  font-size: 0.97em;
+  color: #6b7280;
 }
 
-.job-meta {
-  display: flex;
-  gap: 15px;
-  font-size: 14px;
-  color: #666;
+.job-meta span {
+  margin-right: 1.1rem;
 }
 
 .job-actions {
@@ -210,95 +217,109 @@
 
 /* Modal Styles */
 .jobs-modal-overlay {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background: rgba(0,0,0,0.5) !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  z-index: 1000 !important;
-}
-
-.jobs-modal {
-  background: white !important;
-  border-radius: 8px !important;
-  padding: 20px !important;
-  max-width: 600px !important;
-  width: 90% !important;
-  max-height: 90vh !important;
-  overflow-y: auto !important;
-  z-index: 1001 !important;
-  position: relative !important;
-  box-shadow: 0 0 20px 5px #00000055 !important;
-}
-
-.modal-header {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(36, 39, 46, 0.18);
+  z-index: 1200;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  justify-content: center;
 }
 
-.modal-header h3 {
-  margin: 0;
+.job-modal {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(37,99,235,0.22), 0 3px 12px rgba(6,182,212,0.16);
+  max-width: 420px;
+  width: 98vw;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1300;
 }
 
-.modal-header button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
+.job-modal .modal-header {
+  border-bottom: none;
+  padding-bottom: 0.5rem;
+  width: 100%;
 }
 
 .job-form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1.1rem;
 }
 
 .job-form input,
 .job-form select,
 .job-form textarea {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #e0e7ef;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  background: #f8fafc;
+  margin-bottom: 0.2rem;
+  transition: border 0.15s;
 }
 
-.job-form textarea {
-  min-height: 100px;
-  resize: vertical;
+.job-form input:focus,
+.job-form select:focus,
+.job-form textarea:focus {
+  border-color: #2563eb;
+  outline: none;
 }
 
 .form-actions {
   display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.form-actions button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
 }
 
 .form-actions button[type="submit"] {
-  background: #28a745;
-  color: white;
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+  color: #232946;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.08rem;
+  box-shadow: 0 2px 8px rgba(67, 233, 123, 0.10);
+  transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+
+.form-actions button[type="submit"]:hover {
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
+  color: #232946;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 4px 16px rgba(67, 233, 123, 0.18);
 }
 
 .form-actions button[type="button"] {
-  background: #6c757d;
-  color: white;
+  background: #e0e7ef;
+  color: #232946;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.08rem;
+  transition: background 0.18s, color 0.18s;
+}
+
+.form-actions button[type="button"]:hover {
+  background: #fc5c7d;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .job-modal {
+    max-width: 98vw;
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+  }
 }
 
 /* Responsive Design */
@@ -338,16 +359,83 @@
 }
 
 .delete-job-btn {
-  background: #dc3545;
-  color: white;
+  background: #fc5c7d;
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: 10px;
-  transition: background 0.2s;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.97em;
+  transition: background 0.16s, box-shadow 0.16s;
 }
 .delete-job-btn:hover {
-  background: #b52a37;
+  background: #e57373;
+  box-shadow: 0 2px 8px rgba(252, 92, 125, 0.12);
+}
+
+/* Light, clean, and attractive color palette for Events */
+
+.event-card {
+  background: #fff;
+  color: #222;
+  border-radius: 16px;
+  border: 1.5px solid #e0e7ef;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.06);
+  transition: transform 0.16s, box-shadow 0.16s;
+}
+.event-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.10);
+}
+.event-card-body {
+  padding: 1.4rem 1.1rem 1.1rem 1.1rem;
+}
+.event-type-badge {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+  margin-right: 0.5rem;
+  font-size: 0.95em;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.08);
+}
+.event-status-badge {
+  background: #e5e7eb;
+  color: #2563eb;
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: 0.95em;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.04);
+}
+.event-action-btn {
+  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.08);
+  transition: background 0.16s, box-shadow 0.16s, transform 0.16s;
+}
+.event-action-btn:hover, .event-action-btn:focus {
+  background: linear-gradient(90deg, #1e40af 0%, #0e7490 100%);
+  color: #fff !important;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.14);
+}
+.event-modal .modal-content {
+  background: #fff;
+  color: #222;
+  border-radius: 16px;
+  border: 1.5px solid #e0e7ef;
+}
+@media (max-width: 768px) {
+  .event-card {
+    margin-bottom: 1.2rem;
+  }
+  .event-card-body {
+    padding: 1rem 0.7rem 0.7rem 0.7rem;
+  }
+}
+body {
+  background: #f8fafc;
 } 

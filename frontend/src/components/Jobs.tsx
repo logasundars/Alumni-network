@@ -230,35 +230,31 @@ const Jobs: React.FC = () => {
                 console.log('Job:', job, 'userEmail:', userEmail);
                 return (
                   <div key={job.id} className="job-card">
-                    <div className="job-header">
-                      <h3>{job.title}</h3>
-                      <span className="status-badge">{job.status}</span>
+                    <div className="job-header d-flex justify-content-between align-items-center">
+                      <h3 className="mb-0">{job.title}</h3>
+                      <span className="event-status-badge">{job.status}</span>
                     </div>
-                    
-                    <div className="job-company">{job.company}</div>
-                    <div className="job-location">{job.location}</div>
-                    
-                    <div className="job-details">
-                      <span className="job-type">{job.jobType.replace('_', ' ')}</span>
-                      <span className="experience-level">{job.experienceLevel.replace('_', ' ')}</span>
-                      <span className="salary">{formatSalary(job.salaryMin, job.salaryMax, job.salaryCurrency)}</span>
+                    <div className="job-company text-primary">{job.company}</div>
+                    <div className="job-location text-secondary">{job.location}</div>
+                    <div className="job-details mb-2">
+                      <span className="event-type-badge me-2">{job.jobType.replace('_', ' ')}</span>
+                      <span className="event-type-badge me-2">{job.experienceLevel.replace('_', ' ')}</span>
+                      <span className="salary text-muted">{formatSalary(job.salaryMin, job.salaryMax, job.salaryCurrency)}</span>
                     </div>
-                    
-                    <div className="job-description">
+                    <div className="job-description mb-2">
                       {job.description.length > 200 
                         ? `${job.description.substring(0, 200)}...` 
                         : job.description
                       }
                     </div>
-                    
-                    <div className="job-footer">
-                      <div className="job-meta">
+                    <div className="job-footer d-flex justify-content-between align-items-center">
+                      <div className="job-meta small text-muted">
                         <span>Posted by: {job.postedByName}</span>
-                        <span>Applications: {job.applicationCount}</span>
-                        <span>Posted: {formatDate(job.createdAt)}</span>
+                        <span className="ms-3">Applications: {job.applicationCount}</span>
+                        <span className="ms-3">Posted: {formatDate(job.createdAt)}</span>
                       </div>
                       {userEmail && job.postedByName === userEmail && (
-                        <button className="delete-job-btn" onClick={() => deleteJobPosting(job.id)}>
+                        <button className="event-action-btn ms-2" onClick={() => deleteJobPosting(job.id)}>
                           Delete
                         </button>
                       )}
@@ -274,15 +270,11 @@ const Jobs: React.FC = () => {
       {/* Create Job Form Modal */}
       {showCreateForm && (
         <div className="jobs-modal-overlay" style={{zIndex: 9999}}>
-          <div className="jobs-modal" style={{zIndex: 10000}}>
+          <div className="job-modal">
             <div className="modal-header">
               <h3>Post a New Job</h3>
-              <button onClick={() => {
-                console.log('Closing modal');
-                setShowCreateForm(false);
-              }}>&times;</button>
+              <button onClick={() => setShowCreateForm(false)}>&times;</button>
             </div>
-            
             <form onSubmit={createJobPosting} className="job-form">
               <input
                 type="text"

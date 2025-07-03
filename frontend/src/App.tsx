@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import NewsFeed from './components/NewsFeed';
 import ExternalNews from './components/ExternalNews';
 import LoadingScreen from './components/LoadingScreen';
+import CalendarFab from './components/CalendarFab';
 
 interface User {
   email: string;
@@ -114,6 +115,7 @@ function App() {
           )
         } />
       </Routes>
+      <CalendarFab />
     </Router>
   );
 }

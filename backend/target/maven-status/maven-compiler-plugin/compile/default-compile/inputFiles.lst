@@ -16,6 +16,7 @@ E:\Alumini- network\backend\src\main\java\com\alumninetwork\entity\EventType.jav
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\dto\AuthResponse.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\repository\UserRepository.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\security\JwtAuthenticationFilter.java
+E:\Alumini- network\backend\src\main\java\com\alumninetwork\AlumniNetworkApplication.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\dto\CommentResponse.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\entity\JobStatus.java
 E:\Alumini- network\backend\src\main\java\com\alumninetwork\dto\CommentRequest.java
