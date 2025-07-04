@@ -7,6 +7,7 @@ import NewsFeed from './components/NewsFeed';
 import ExternalNews from './components/ExternalNews';
 import LoadingScreen from './components/LoadingScreen';
 import CalendarFab from './components/CalendarFab';
+import Mentorship from './components/Mentorship';
 
 interface User {
   email: string;

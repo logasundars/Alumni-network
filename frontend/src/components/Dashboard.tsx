@@ -15,6 +15,7 @@ import Events from './Events';
 import Jobs from './Jobs';
 import NewsFeed from './NewsFeed';
 import Sidebar from './Sidebar';
+import Mentorship from './Mentorship';
 
 interface User {
   email: string;
@@ -45,7 +46,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user: initialUser, onLogout }) =>
     { name: 'Job Board', status: 'active', description: 'Post and apply for job opportunities' },
     { name: 'News Feed', status: 'active', description: 'Stay updated with latest news' },
     { name: 'Alumni Directory', status: 'coming', description: 'Connect with fellow alumni' },
-    { name: 'Mentorship Program', status: 'coming', description: 'Find mentors and mentees' },
+    { name: 'Mentorship Program', status: 'active', description: 'Find mentors and mentees' },
   ];
 
   const renderContent = () => {
@@ -105,6 +106,19 @@ const Dashboard: React.FC<DashboardProps> = ({ user: initialUser, onLogout }) =>
             transition={{ duration: 0.3 }}
           >
             <NewsFeed />
+          </motion.div>
+        );
+      case 'mentorship':
+        return (
+          <motion.div
+            key="mentorship"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={contentVariants}
+            transition={{ duration: 0.3 }}
+          >
+            <Mentorship />
           </motion.div>
         );
       case 'dashboard':
@@ -259,15 +273,21 @@ const Dashboard: React.FC<DashboardProps> = ({ user: initialUser, onLogout }) =>
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
                           >
-                            <div style={{
-                              display: 'flex',
-                              alignItems: 'flex-start',
-                              gap: 'var(--spacing-md)',
-                              padding: 'var(--spacing-md)',
-                              borderRadius: 'var(--radius-lg)',
-                              background: feature.status === 'active' ? 'var(--gray-50)' : 'var(--gray-100)',
-                              border: `1px solid ${feature.status === 'active' ? 'var(--gray-200)' : 'var(--gray-300)'}`
-                            }}>
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'flex-start',
+                                gap: 'var(--spacing-md)',
+                                padding: 'var(--spacing-md)',
+                                borderRadius: 'var(--radius-lg)',
+                                background: feature.status === 'active' ? 'var(--gray-50)' : 'var(--gray-100)',
+                                border: `1px solid ${feature.status === 'active' ? 'var(--gray-200)' : 'var(--gray-300)'}`,
+                                cursor: feature.name === 'Mentorship Program' && feature.status === 'active' ? 'pointer' : 'default',
+                              }}
+                              onClick={() => {
+                                if (feature.name === 'Mentorship Program' && feature.status === 'active') setActiveTab('mentorship');
+                              }}
+                            >
                               <div style={{
                                 width: '32px',
                                 height: '32px',

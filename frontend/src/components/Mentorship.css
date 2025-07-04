@@ -1,0 +1,308 @@
+.mentorship-container {
+    padding: 2rem 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.mentorship-title {
+    color: white !important;
+    text-align: center;
+    margin-bottom: 1rem !important;
+    font-weight: 700 !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mentorship-container h6 {
+    color: rgba(255, 255, 255, 0.9) !important;
+    text-align: center;
+    margin-bottom: 2rem !important;
+    font-weight: 400 !important;
+}
+
+.mentor-card {
+    background: white;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.mentor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mentor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.mentor-avatar {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    width: 56px !important;
+    height: 56px !important;
+    font-size: 1.2rem !important;
+}
+
+.mentorship-type-chip {
+    font-weight: 500 !important;
+    border-radius: 20px !important;
+    transition: all 0.3s ease;
+}
+
+.mentorship-type-chip:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mentorship-card {
+    background: white;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.mentorship-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.mentorship-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+}
+
+.application-card {
+    background: white;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.application-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.application-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF9800, #F57C00);
+}
+
+/* Tab Styling */
+.MuiTabs-root {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.MuiTab-root {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    border-radius: 8px !important;
+    margin: 0 4px !important;
+    transition: all 0.3s ease !important;
+}
+
+.MuiTab-root.Mui-selected {
+    color: white !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.MuiTab-root:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Button Styling */
+.MuiButton-contained {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    border-radius: 25px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    padding: 12px 24px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3) !important;
+}
+
+.MuiButton-contained:hover {
+    background: linear-gradient(135deg, #5a6fd8, #6a4190) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Dialog Styling */
+.MuiDialog-paper {
+    border-radius: 16px !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2) !important;
+}
+
+.MuiDialogTitle-root {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* Form Styling */
+.MuiTextField-root .MuiOutlinedInput-root {
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused {
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+}
+
+.MuiFormControl-root .MuiOutlinedInput-root {
+    border-radius: 12px !important;
+}
+
+/* Chip Styling */
+.MuiChip-root {
+    border-radius: 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+}
+
+.MuiChip-root:hover {
+    transform: scale(1.05);
+}
+
+/* Alert Styling */
+.MuiAlert-root {
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.MuiCircularProgress-root {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mentorship-container {
+        padding: 1rem 0;
+    }
+    
+    .mentorship-title {
+        font-size: 2rem !important;
+    }
+    
+    .mentor-card,
+    .mentorship-card,
+    .application-card {
+        margin-bottom: 1rem;
+    }
+    
+    .MuiTabs-root {
+        padding: 4px;
+    }
+    
+    .MuiTab-root {
+        font-size: 0.875rem !important;
+        padding: 8px 12px !important;
+    }
+}
+
+/* Card Content Spacing */
+.MuiCardContent-root {
+    padding: 24px !important;
+}
+
+.MuiCardActions-root {
+    padding: 16px 24px 24px !important;
+}
+
+/* Typography Enhancements */
+.MuiTypography-h6 {
+    font-weight: 600 !important;
+    color: #2c3e50 !important;
+}
+
+.MuiTypography-body2 {
+    line-height: 1.6 !important;
+}
+
+/* Status Chip Colors */
+.MuiChip-colorSuccess {
+    background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+    color: white !important;
+}
+
+.MuiChip-colorWarning {
+    background: linear-gradient(135deg, #FF9800, #F57C00) !important;
+    color: white !important;
+}
+
+.MuiChip-colorInfo {
+    background: linear-gradient(135deg, #2196F3, #1976D2) !important;
+    color: white !important;
+}
+
+.MuiChip-colorError {
+    background: linear-gradient(135deg, #F44336, #D32F2F) !important;
+    color: white !important;
+}
+
+/* Hover Effects for Interactive Elements */
+.MuiButton-root:hover {
+    transform: translateY(-2px);
+}
+
+.MuiCard-root:hover .MuiCardActions-root .MuiButton-root {
+    transform: translateY(-2px);
+}
+
+/* Focus States */
+.MuiButton-root:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:focus-within {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+} 

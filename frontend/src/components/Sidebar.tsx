@@ -8,7 +8,8 @@ import {
   Work as WorkIcon,
   Article as NewsIcon,
   Logout as LogoutIcon,
-  School as SchoolIcon
+  School as SchoolIcon,
+  Psychology as MentorshipIcon
 } from '@mui/icons-material';
 
 interface SidebarProps {
@@ -40,6 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, use
     { id: 'events', label: 'Events', icon: EventIcon, color: '#f59e0b' },
     { id: 'jobs', label: 'Job Board', icon: WorkIcon, color: '#8b5cf6' },
     { id: 'news', label: 'News Feed', icon: NewsIcon, color: '#06b6d4' },
+    { id: 'mentorship', label: 'Mentorship', icon: MentorshipIcon, color: '#ff9800' },
   ];
 
   return (
