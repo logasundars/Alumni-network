@@ -39,4 +39,9 @@ public interface MentorshipApplicationRepository extends JpaRepository<Mentorshi
     
     // Check if application exists between mentor and applicant
     boolean existsByMentorAndApplicantAndStatus(User mentor, User applicant, ApplicationStatus status);
+
+    // Find all applications for a specific mentorship
+    List<MentorshipApplication> findByMentorshipOrderByCreatedAtDesc(com.alumninetwork.entity.Mentorship mentorship);
+    // Count applications for a specific mentorship and status
+    long countByMentorshipAndStatus(com.alumninetwork.entity.Mentorship mentorship, ApplicationStatus status);
 } 

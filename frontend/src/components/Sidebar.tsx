@@ -35,7 +35,7 @@ const getProfileImageUrl = (url?: string) => {
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, user }) => {
-  const navItems = [
+  const studentNavItems = [
     { id: 'dashboard', label: 'Dashboard', icon: DashboardIcon, color: '#2563eb' },
     { id: 'profile', label: 'Profile', icon: PersonIcon, color: '#10b981' },
     { id: 'events', label: 'Events', icon: EventIcon, color: '#f59e0b' },
@@ -43,6 +43,15 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogout, use
     { id: 'news', label: 'News Feed', icon: NewsIcon, color: '#06b6d4' },
     { id: 'mentorship', label: 'Mentorship', icon: MentorshipIcon, color: '#ff9800' },
   ];
+  const alumniNavItems = [
+    ...studentNavItems,
+    // Add alumni-only items here if needed
+  ];
+  const adminNavItems = [
+    ...alumniNavItems,
+    // Add admin-only items here if needed
+  ];
+  const navItems = user.role === 'ADMIN' ? adminNavItems : user.role === 'ALUMNI' ? alumniNavItems : studentNavItems;
 
   return (
     <div className="sidebar">

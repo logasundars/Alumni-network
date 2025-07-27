@@ -125,16 +125,26 @@ public class MentorshipController {
         }
     }
     
-    @PostMapping("/applications/create")
-    public ResponseEntity<MentorshipApplicationDto> createApplication(@RequestBody MentorshipApplicationDto applicationDto) {
+    @PostMapping("/applications/create/{mentorshipId}")
+    public ResponseEntity<MentorshipApplicationDto> createApplicationForMentorship(@RequestBody MentorshipApplicationDto applicationDto, @PathVariable Long mentorshipId) {
         try {
-            MentorshipApplicationDto createdApplication = mentorshipService.createApplication(applicationDto);
+            MentorshipApplicationDto createdApplication = mentorshipService.createApplication(applicationDto, mentorshipId);
             return ResponseEntity.ok(createdApplication);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
+    @GetMapping("/applications/mentorship/{mentorshipId}")
+    public ResponseEntity<List<MentorshipApplicationDto>> getApplicationsByMentorship(@PathVariable Long mentorshipId) {
+        try {
+            List<MentorshipApplicationDto> applications = mentorshipService.getApplicationsByMentorship(mentorshipId);
+            return ResponseEntity.ok(applications);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @PutMapping("/applications/{applicationId}/respond")
     public ResponseEntity<MentorshipApplicationDto> respondToApplication(
             @PathVariable Long applicationId,
@@ -143,6 +153,26 @@ public class MentorshipController {
         try {
             MentorshipApplicationDto updatedApplication = mentorshipService.respondToApplication(applicationId, status, response);
             return ResponseEntity.ok(updatedApplication);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
+    @GetMapping("/applications/count/{mentorId}")
+    public ResponseEntity<Long> getRegistrationCountForMentor(@PathVariable Long mentorId) {
+        try {
+            long count = mentorshipService.getRegistrationCountForMentor(mentorId);
+            return ResponseEntity.ok(count);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/applications/count/mentorship/{mentorshipId}")
+    public ResponseEntity<Long> getRegistrationCountForMentorship(@PathVariable Long mentorshipId) {
+        try {
+            long count = mentorshipService.getRegistrationCountForMentorship(mentorshipId);
+            return ResponseEntity.ok(count);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

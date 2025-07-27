@@ -44,6 +44,11 @@ public class JobService {
         if (user.isEmpty()) {
             throw new RuntimeException("User not found");
         }
+        // Only ALUMNI and ADMIN can post jobs
+        UserRole role = user.get().getRole();
+        if (role == UserRole.STUDENT) {
+            throw new RuntimeException("Students are not allowed to post jobs");
+        }
         
         JobPosting jobPosting = new JobPosting();
         jobPosting.setTitle(request.getTitle());

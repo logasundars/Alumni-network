@@ -34,7 +34,15 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setFirstName(request.getFirstName());
         user.setLastName(request.getLastName());
-        user.setRole(UserRole.USER);
+        // Set role from request, default to STUDENT if invalid
+        UserRole role;
+        try {
+            role = UserRole.valueOf(request.getRole() != null ? request.getRole().toUpperCase() : "STUDENT");
+            if (role == UserRole.ADMIN) role = UserRole.STUDENT; // Prevent admin registration
+        } catch (Exception e) {
+            role = UserRole.STUDENT;
+        }
+        user.setRole(role);
         
         User savedUser = userRepository.save(user);
         

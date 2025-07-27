@@ -12,6 +12,10 @@ public class MentorshipApplication {
     private Long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentorship_id", nullable = false)
+    private Mentorship mentorship;
+    // @Deprecated: Use mentorship.getMentor() instead
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id", nullable = false)
     private User mentor;
     
@@ -91,6 +95,13 @@ public class MentorshipApplication {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Mentorship getMentorship() {
+        return mentorship;
+    }
+    public void setMentorship(Mentorship mentorship) {
+        this.mentorship = mentorship;
     }
     
     public User getMentor() {

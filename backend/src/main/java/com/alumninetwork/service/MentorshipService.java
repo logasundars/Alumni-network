@@ -158,22 +158,24 @@ public class MentorshipService {
                 .collect(Collectors.toList());
     }
     
-    public MentorshipApplicationDto createApplication(MentorshipApplicationDto applicationDto) {
-        Optional<User> mentor = userRepository.findById(applicationDto.getMentor().getId());
+    public MentorshipApplicationDto createApplication(MentorshipApplicationDto applicationDto, Long mentorshipId) {
+        Optional<Mentorship> mentorship = mentorshipRepository.findById(mentorshipId);
+        if (mentorship.isEmpty()) {
+            throw new RuntimeException("Mentorship not found");
+        }
         Optional<User> applicant = userRepository.findById(applicationDto.getApplicant().getId());
-        
-        if (mentor.isEmpty() || applicant.isEmpty()) {
-            throw new RuntimeException("Mentor or applicant not found");
+        if (applicant.isEmpty()) {
+            throw new RuntimeException("Applicant not found");
         }
-        
-        // Check if application already exists
-        if (applicationRepository.existsByMentorAndApplicantAndStatus(
-                mentor.get(), applicant.get(), ApplicationStatus.PENDING)) {
-            throw new RuntimeException("Application already exists");
+        // Check if application already exists for this mentorship
+        List<MentorshipApplication> existing = applicationRepository.findByMentorshipOrderByCreatedAtDesc(mentorship.get());
+        boolean alreadyApplied = existing.stream().anyMatch(a -> a.getApplicant().getId().equals(applicant.get().getId()) && a.getStatus() == ApplicationStatus.PENDING);
+        if (alreadyApplied) {
+            throw new RuntimeException("Application already exists for this mentorship");
         }
-        
         MentorshipApplication application = new MentorshipApplication();
-        application.setMentor(mentor.get());
+        application.setMentorship(mentorship.get());
+        application.setMentor(mentorship.get().getMentor());
         application.setApplicant(applicant.get());
         application.setType(applicationDto.getType());
         application.setTitle(applicationDto.getTitle());
@@ -187,9 +189,25 @@ public class MentorshipService {
         application.setMeetingFrequency(applicationDto.getMeetingFrequency());
         application.setAdditionalNotes(applicationDto.getAdditionalNotes());
         application.setStatus(ApplicationStatus.PENDING);
-        
         MentorshipApplication savedApplication = applicationRepository.save(application);
         return convertApplicationToDto(savedApplication);
+    }
+
+    public List<MentorshipApplicationDto> getApplicationsByMentorship(Long mentorshipId) {
+        Optional<Mentorship> mentorship = mentorshipRepository.findById(mentorshipId);
+        if (mentorship.isEmpty()) {
+            throw new RuntimeException("Mentorship not found");
+        }
+        return applicationRepository.findByMentorshipOrderByCreatedAtDesc(mentorship.get())
+            .stream().map(this::convertApplicationToDto).collect(Collectors.toList());
+    }
+
+    public long getRegistrationCountForMentorship(Long mentorshipId) {
+        Optional<Mentorship> mentorship = mentorshipRepository.findById(mentorshipId);
+        if (mentorship.isEmpty()) {
+            throw new RuntimeException("Mentorship not found");
+        }
+        return applicationRepository.countByMentorshipAndStatus(mentorship.get(), ApplicationStatus.PENDING);
     }
     
     public MentorshipApplicationDto respondToApplication(Long applicationId, ApplicationStatus status, String response) {
@@ -222,6 +240,15 @@ public class MentorshipService {
         
         MentorshipApplication savedApplication = applicationRepository.save(existingApplication);
         return convertApplicationToDto(savedApplication);
+    }
+    
+    public long getRegistrationCountForMentor(Long mentorId) {
+        Optional<User> mentor = userRepository.findById(mentorId);
+        if (mentor.isEmpty()) {
+            throw new RuntimeException("Mentor not found");
+        }
+        // Count all applications for this mentor (optionally filter by status)
+        return applicationRepository.countByMentorAndStatus(mentor.get(), ApplicationStatus.PENDING);
     }
     
     // Helper methods for conversion

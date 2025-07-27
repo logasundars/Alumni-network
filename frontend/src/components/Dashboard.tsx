@@ -40,14 +40,24 @@ const Dashboard: React.FC<DashboardProps> = ({ user: initialUser, onLogout }) =>
     { label: 'News Articles', value: '89', icon: NewsIcon, color: '#06b6d4', change: '+15%' },
   ];
 
-  const features = [
+  const studentFeatures = [
     { name: 'Profile Management', status: 'active', description: 'Complete profile customization with social links' },
-    { name: 'Events Management', status: 'active', description: 'Create and manage alumni events' },
-    { name: 'Job Board', status: 'active', description: 'Post and apply for job opportunities' },
+    { name: 'Events Management', status: 'active', description: 'View and register for alumni events' },
+    { name: 'Job Board', status: 'active', description: 'Apply for job opportunities' },
     { name: 'News Feed', status: 'active', description: 'Stay updated with latest news' },
-    { name: 'Alumni Directory', status: 'coming', description: 'Connect with fellow alumni' },
-    { name: 'Mentorship Program', status: 'active', description: 'Find mentors and mentees' },
+    { name: 'Mentorship Program', status: 'active', description: 'Find mentors' },
   ];
+  const alumniFeatures = [
+    ...studentFeatures,
+    { name: 'Event Creation', status: 'active', description: 'Create and manage events' },
+    { name: 'Job Posting', status: 'active', description: 'Post job opportunities' },
+    { name: 'Mentor Management', status: 'active', description: 'Offer mentorship to students' },
+  ];
+  const adminFeatures = [
+    ...alumniFeatures,
+    { name: 'Admin Panel', status: 'active', description: 'Manage users, content, and analytics' },
+  ];
+  const features = user.role === 'ADMIN' ? adminFeatures : user.role === 'ALUMNI' ? alumniFeatures : studentFeatures;
 
   const renderContent = () => {
     const contentVariants = {

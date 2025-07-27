@@ -115,6 +115,8 @@ const Mentorship: React.FC = () => {
         meetingFrequency: 'Weekly',
         additionalNotes: ''
     });
+    // Add state for registration counts
+    const [registrationCounts, setRegistrationCounts] = useState<{ [mentorId: number]: number }>({});
 
     const mentorshipTypes = [
         { value: 'CAREER_GUIDANCE', label: 'Career Guidance', icon: <Work />, color: '#2196F3' },
@@ -136,6 +138,26 @@ const Mentorship: React.FC = () => {
         fetchMyMentorships();
         fetchMyApplications();
     }, []);
+
+    // Fetch registration count for alumni
+    const fetchRegistrationCount = async (mentorId: number) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/mentorship/applications/count/${mentorId}`);
+            if (response.ok) {
+                const count = await response.json();
+                setRegistrationCounts(prev => ({ ...prev, [mentorId]: count }));
+            }
+        } catch (error) {
+            // ignore
+        }
+    };
+
+    // Fetch counts for alumni on mount
+    useEffect(() => {
+        if (currentUser.role === 'ALUMNI' || currentUser.role === 'ADMIN') {
+            fetchRegistrationCount(currentUser.id);
+        }
+    }, [currentUser.id, currentUser.role]);
 
     const fetchMentors = async () => {
         try {
@@ -307,15 +329,17 @@ const Mentorship: React.FC = () => {
                                     </Box>
                                 </CardContent>
                                 <CardActions>
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        startIcon={<Send />}
-                                        onClick={() => handleApplyForMentorship(mentor)}
-                                        fullWidth
-                                    >
-                                        Apply for Mentorship
-                                    </Button>
+                                    {currentUser.role === 'STUDENT' && (
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            startIcon={<Send />}
+                                            onClick={() => handleApplyForMentorship(mentor)}
+                                            fullWidth
+                                        >
+                                            Apply for Mentorship
+                                        </Button>
+                                    )}
                                 </CardActions>
                             </Card>
                         </Grid>
@@ -351,6 +375,12 @@ const Mentorship: React.FC = () => {
                                                     size="small"
                                                 />
                                             </Box>
+                                            {/* Registration count for alumni */}
+                                            {(currentUser.role === 'ALUMNI' || currentUser.role === 'ADMIN') && (
+                                                <Typography variant="body2" color="primary" mb={1}>
+                                                    Student Registrations: {registrationCounts[currentUser.id] ?? 0}
+                                                </Typography>
+                                            )}
                                             
                                             <Box display="flex" alignItems="center" mb={1}>
                                                 {typeInfo.icon}

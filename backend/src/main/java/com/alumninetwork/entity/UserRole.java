@@ -1,6 +1,7 @@
 package com.alumninetwork.entity;
 
 public enum UserRole {
-    USER,
+    STUDENT,
+    ALUMNI,
     ADMIN
 } 

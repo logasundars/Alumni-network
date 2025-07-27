@@ -22,14 +22,17 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
     lastName: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: 'STUDENT' // Default to STUDENT
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -57,7 +60,8 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
           firstName: formData.firstName,
           lastName: formData.lastName,
         email: formData.email,
-        password: formData.password
+        password: formData.password,
+        role: formData.role // Send role
       });
 
       if (response.data.token) {
@@ -324,11 +328,34 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
                 </Form.Group>
               </motion.div>
 
-              {/* Password */}
+              {/* Register as */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
+              >
+                <Form.Group className="mb-3">
+                  <Form.Label style={{ color: 'var(--gray-700)', fontWeight: 600, fontSize: '0.875rem', marginBottom: 'var(--spacing-sm)' }}>
+                    Register as
+                  </Form.Label>
+                  <Form.Select
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    required
+                    style={{ borderRadius: 'var(--radius-lg)', border: '2px solid var(--gray-200)', fontSize: '1rem', height: '48px', marginBottom: 'var(--spacing-lg)' }}
+                  >
+                    <option value="STUDENT">Student</option>
+                    <option value="ALUMNI">Alumni</option>
+                  </Form.Select>
+                </Form.Group>
+              </motion.div>
+
+              {/* Password */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
               >
                 <Form.Group className="mb-3">
                   <Form.Label style={{
@@ -409,7 +436,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
               >
                 <Form.Group className="mb-4">
                   <Form.Label style={{
@@ -489,7 +516,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
+                transition={{ delay: 0.9, duration: 0.5 }}
               >
                 <Button
                   type="submit"
@@ -539,7 +566,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin }) => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.5 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
                 style={{ textAlign: 'center', marginTop: 'var(--spacing-xl)' }}
               >
                 <p style={{
